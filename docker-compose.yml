@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  meteo_portal:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: general-directorate-of-meteorology-syria_node
+    restart: unless-stopped
+    ports:
+      - "${PORT:-8080}:8080"
+    environment:
+      - PORT=8080
+      - METEO_AGENCY_NAME="General Directorate of Meteorology - Syria"
+      - WMO_STATION_ID="WMO-40080"
+      - PRIMARY_LANG="ar"
+      - FALLBACK_CACHE_ENABLED=true
+    volumes:
+      - ./data:/app/data
